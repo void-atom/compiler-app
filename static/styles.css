@@ -1,11 +1,22 @@
 body {
+    display: block !important;
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    text-align: center; /* Center-align all text in the body */
+}
+
+.header {
+    text-align: center; /* Center-align the text inside the header */
+    margin: 0 auto; /* Center the header horizontally */
+    padding: 20px 0; /* Add some padding for spacing */
+    width: 100%; /* Ensure the header spans the full width */
+    display: block; /* Ensure the header is a block-level element */
 }
 
 h2 {
-    margin-bottom: 20px;
+    margin: 0; /* Remove default margin from h2 */
+    padding: 0; /* Remove default padding from h2 */
 }
 
 .container {
@@ -13,28 +24,33 @@ h2 {
     justify-content: space-around;
     align-items: flex-start;
     max-width: 90%;
-    margin: auto;
+    margin: 20px auto; 
+    height: 50vh;    
+    position:relative;
 }
 
-.editor-section{
-    width: 45%;
+.editor-section {
+    width: 50%;
+    height: calc(100% - 10px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background: #f9f9f9;
-    height:200px;
 }
+
+
 .output-section {
-    height: 250px;
-    width: 45%;
+    width: 50%;
+    height:  calc(100% - 10px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background: #f9f9f9;
 }
+
 textarea {
     width: 90%;
-    height: 300px;
+    height: 200px;
     font-family: monospace;
     font-size: 14px;
     padding: 10px;
@@ -49,8 +65,10 @@ textarea {
     padding: 10px;
     border-radius: 5px;
     text-align: left;
-    min-height: 20px;
     overflow-y: auto;
+    flex: 1; 
+    overflow: auto; 
+    height: 50%;
 }
 
 .loading {
