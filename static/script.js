@@ -1,69 +1,35 @@
-document.getElementById("uploadForm").onsubmit = async function (event) {
-    event.preventDefault();
-    
-    const outputDiv = document.getElementById("output");
-    const codeEditor = document.getElementById("codeEditor").value.trim();
-    // let filename = document.getElementById("filename").value.trim() || "code.c";
-    let filename = 'kelp.c'
 
-    if (!codeEditor) {
-        alert("Please enter some C code.");
-        return;
+document.getElementById('runCompiler').addEventListener('click', function() {
+    const codeInput = document.getElementById('code-input').value;
+    if (codeInput.trim() === '') {
+      alert("Please enter some code to compile.");
+      return;
     }
 
-    outputDiv.innerHTML = '<span class="loading">Processing file, please wait...</span>';
+    // Create a FormData object and append the code as a file
+    const formData = new FormData();
+    const blob = new Blob([codeInput], { type: 'text/plain' });
+    formData.append('file', blob, 'code.c'); // You can change 'code.c' to any file extension
 
-    let formData = new FormData();
-    const fileBlob = new Blob([codeEditor], { type: "text/plain" });
-    formData.append("file", fileBlob, filename);
-
-    try {
-        console.log("Uploading code as file:", filename);
-
-        let response = await fetch("http://127.0.0.1:5000/upload", { 
-            method: "POST", 
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        });
-
-        console.log("Response status:", response.status);
-
-        if (!response.ok) {
-            outputDiv.innerHTML = `<span class="error">Server error: ${response.status} ${response.statusText}</span>`;
-            console.error("Server returned error:", response.status, response.statusText);
-
-            try {
-                const errorText = await response.text();
-                console.error("Error details:", errorText);
-            } catch (e) {
-                console.error("Couldn't read error details");
-            }
-            return;
-        }
-
-        let result;
-        try {
-            result = await response.json();
-            console.log("Response received:", result);
-        } catch (jsonError) {
-            console.error("JSON parsing error:", jsonError);
-            const rawText = await response.text();
-            console.log("Raw response:", rawText);
-            outputDiv.innerHTML = `<span class="error">Server returned invalid JSON. Raw response: ${rawText || 'empty response'}</span>`;
-            return;
-        }
-
-        if (result.error && result.error.trim() !== "") {
-            outputDiv.innerHTML = `<span class="error">Error: ${result.error}</span>`;
-        } else if (result.output) {
-            outputDiv.innerText = result.output;
+    // Send the form data to the backend
+    fetch('http://127.0.0.1:5000/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Server Response: ", data); // Log the server response for debugging
+        if (data.output) {  // Look for 'output' instead of 'assembly'
+          // If the response contains Assembly code, update the Assembly section
+          document.getElementById('Assembly').innerHTML = data.output;
+          console.log(data.output);
         } else {
-            outputDiv.innerText = "No output received from tokenizer";
+          // If there is no assembly code in the response
+          document.getElementById('Assembly').innerHTML = 'Error generating assembly code.';
         }
-    } catch (error) {
-        console.error("Fetch error:", error);
-        outputDiv.innerHTML = `<span class="error">Network error: ${error.message}</span>`;
-    }
-};
-
-
+      })
+      .catch(error => {
+        console.error('Error uploading file:', error);
+        document.getElementById('Assembly').innerHTML = 'Failed to compile the code.';
+      });
+    });

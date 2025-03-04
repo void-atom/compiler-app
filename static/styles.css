@@ -1,103 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    display: block !important;
     font-family: Arial, sans-serif;
-    margin: 0; /* Remove default body margin */
-    padding: 0; /* Remove default body padding */
-    text-align: center; /* Center-align all text in the body */
+    text-align: center;
+    background: #f9f9f9;
+    color: black;
 }
 
 .header {
-    text-align: center; /* Center-align the text inside the header */
-    margin: 0 auto; /* Center the header horizontally */
-    padding: 20px 0; /* Add some padding for spacing */
-    width: 100%; /* Ensure the header spans the full width */
-    display: block; /* Ensure the header is a block-level element */
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    background: #4CAF50;
+    color: white;
 }
 
 h2 {
-    margin: 0; /* Remove default margin from h2 */
-    padding: 0; /* Remove default padding from h2 */
+    margin: 0;
+    font-size: 24px;
 }
 
 .container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
     align-items: flex-start;
-    max-width: 90%;
-    margin: 20px auto; 
-    height: 50vh;    
-    position:relative;
+    max-width: 95%;
+    margin: 20px auto;
+    gap: 20px;
+    height: 90vh;
 }
 
-.editor-section {
+.left-section, .right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 50%;
-    height: calc(100% - 10px);
-    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background: #f9f9f9;
+    height: 100%;
 }
 
-
-.output-section {
-    width: 50%;
-    height:  calc(100% - 10px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #f9f9f9;
+.left-section h3, .right-section h3 {
+    text-align: center;
+    margin: 10px;
+    height: 5%;
 }
 
-textarea {
-    width: 90%;
-    height: 200px;
+textarea, #Assembly, #tokenizer-output, #parser-output {
+    width: 95%;
+    height: 82%;
     font-family: monospace;
     font-size: 14px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: none;
-}
-
-#output {
-    white-space: pre-wrap;
-    background: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
+    background: #fff;
     text-align: left;
     overflow-y: auto;
-    flex: 1; 
-    overflow: auto; 
-    height: 50%;
-}
-
-.loading {
-    color: #666;
-    font-style: italic;
-}
-
-.error {
-    color: #c00;
+    white-space: pre-wrap;
 }
 
 button {
-    padding: 8px 16px;
+    margin-top: 10px;
+    padding: 12px 24px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 16px;
 }
 
 button:hover {
     background-color: #45a049;
-}
-
-input[type="text"] {
-    padding: 5px;
-    width: 90%;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
