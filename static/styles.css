@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 90%;
+    margin: auto;
+}
+
+.editor-section{
+    width: 45%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    height:200px;
+}
+.output-section {
+    height: 250px;
+    width: 45%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+textarea {
+    width: 90%;
+    height: 300px;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+#output {
+    white-space: pre-wrap;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+    min-height: 20px;
+    overflow-y: auto;
+}
+
+.loading {
+    color: #666;
+    font-style: italic;
+}
+
+.error {
+    color: #c00;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+input[type="text"] {
+    padding: 5px;
+    width: 90%;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

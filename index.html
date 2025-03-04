@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Code Editor & Tokenizer</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+    <div class ='header'>
+        <h2>C-Compiler for RISC-V</h2>
+    </div>
+
+    <div class="container">
+        
+
+        <div class="editor-section">
+            <h3>Enter C Source Code</h3>
+            <textarea id="codeEditor" placeholder="Write your C code here..."></textarea>           
+            
+        </div>
+
+        <div class="output-section">
+            <form id="uploadForm">
+                <button type="submit">Run Tokenizer</button>
+            </form>
+            <h3>Tokenized output</h3>
+
+            <div id="output">No file yet</div>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+
+</html>
