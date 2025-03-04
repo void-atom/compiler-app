@@ -13,7 +13,7 @@ body {
 
 .header {
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
     width: 100%;
     background: #4CAF50;
     color: white;
@@ -29,13 +29,14 @@ h2 {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    max-width: 95%;
+    max-width: 90%;
     margin: 20px auto;
     gap: 20px;
-    height: 90vh;
+    height: 80vh;
 }
 
 .left-section, .right-section {
+    margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,6 +66,39 @@ textarea, #Assembly, #tokenizer-output, #parser-output {
     text-align: left;
     overflow-y: auto;
     white-space: pre-wrap;
+    resize: none;
+}
+/* Styling the tokenizer table */
+#tokenizer-output table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Styling the table headers */
+#tokenizer-output th {
+    background-color: #4CAF50;  /* Green background */
+    color: white;               /* White text */
+    padding: 12px;
+    text-align: left;
+}
+
+/* Styling the table rows */
+#tokenizer-output td, 
+#tokenizer-output th {
+    border: 1px solid #ddd;     /* Light grey border */
+    padding: 10px;
+}
+
+/* Alternate row colors */
+#tokenizer-output tr:nth-child(even) {
+    background-color: #f2f2f2;  /* Light grey background */
+}
+
+/* Hover effect */
+#tokenizer-output tr:hover {
+    background-color: #ddd;     /* Darker grey on hover */
 }
 
 button {
