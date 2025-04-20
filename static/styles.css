@@ -131,3 +131,47 @@ button {
 button:hover {
     background-color: #45a049;
 }
+.whole-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 90%;
+    margin: 20px auto;
+    gap: 20px;
+    height: 80vh;
+}
+
+
+.mir-inner {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    height: 100%;
+}
+.mir-inner h3{
+    text-align: center;
+    margin: 10px;
+    height: 5%;
+}
+#MIR-output {
+    width: 95%;
+    height: 82%;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    border-radius: 5px;
+    background: transparent; /* Makes it transparent */
+    text-align: left;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    resize: none;
+    color: #000; /* Adjust text color for visibility */
+}

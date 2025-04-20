@@ -19,6 +19,57 @@ function renderASTGraph(dotString) {
         });
 }
 
+function renderMIRGraph(dotString) {
+    const graphContainer = document.getElementById('MIR-output');
+    graphContainer.innerHTML = ""; // Clear previous content
+
+    viz.renderSVGElement(dotString)
+        .then(function (svgElement) {
+            svgElement.style.background = "none";
+            svgElement.style.width = "100%";  
+            svgElement.style.height = "auto"; 
+
+            graphContainer.innerHTML = "";
+            graphContainer.appendChild(svgElement);
+        })
+        .catch(function (error) {
+            console.error("Error rendering graph:", error);
+            graphContainer.innerHTML = "Failed to render MIR.";
+        });
+}
+
+function handleMIRClick()
+{
+    const codeInput = document.getElementById('code-input').value.trim();
+    if (codeInput === '') 
+    {
+        alert("Please enter some code to compile.");
+        return;
+    }
+
+    const formData = new FormData();
+    const blob = new Blob([codeInput], { type: 'text/plain' });
+    formData.append('file', blob, 'mir.c'); 
+
+    fetch('http://127.0.0.1:5000/mir', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Server Response: ", data); 
+            if (data.mirGraph) {
+                renderMIRGraph(data.mirGraph); // use the new render function
+            } else {
+                document.getElementById('MIR-output').innerHTML = 'Error generating MIR.';
+            }
+        })
+        .catch(error => {
+            console.error('Error uploading file:', error);
+            document.getElementById('MIR-output').innerHTML = 'Failed to generate MIR.';
+        });
+}
+
 
 function handleCompilerClick() 
 {
@@ -128,5 +179,6 @@ function handleParserClick()
 document.getElementById('runCompiler').addEventListener('click', handleCompilerClick );
 document.getElementById('runTokenizer').addEventListener('click', handleTokenizerClick );
 document.getElementById('runParser').addEventListener('click', handleParserClick );
+document.getElementById('runMIR').addEventListener('click', handleMIRClick);
 
 
