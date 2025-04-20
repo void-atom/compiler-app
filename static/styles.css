@@ -54,7 +54,7 @@ h2 {
     height: 5%;
 }
 
-textarea, #Assembly, #tokenizer-output, #parser-output {
+textarea, #Assembly{
     width: 95%;
     height: 82%;
     font-family: monospace;
@@ -68,6 +68,22 @@ textarea, #Assembly, #tokenizer-output, #parser-output {
     white-space: pre-wrap;
     resize: none;
 }
+#tokenizer-output, #parser-output {
+    width: 95%;
+    height: 82%;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    border-radius: 5px;
+    background: transparent; /* Makes it transparent */
+    text-align: left;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    resize: none;
+    color: #000; /* Adjust text color for visibility */
+}
+
 /* Styling the tokenizer table */
 #tokenizer-output table {
     width: 100%;
@@ -82,7 +98,7 @@ textarea, #Assembly, #tokenizer-output, #parser-output {
     color: white;               /* White text */
     padding: 12px;
     text-align: left;
-}
+}               
 
 /* Styling the table rows */
 #tokenizer-output td, 

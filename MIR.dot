@@ -1,0 +1,60 @@
+digraph MIR {
+    rankdir=TB; // Top-to-bottom graph direction
+    node0 [label="SCOPE"];
+    subgraph cluster_main {
+        label="Function: main";
+    node3 [label="EXPR_LEAF: c"];
+    node2 -> node3 [label="address"];
+    node4 [label="EXPR_LOAD_IMMEDIATE: 0"];
+    node2 -> node4 [label="value"];
+    node2 [label="expr_store\nsize: 4\noffset: 0"];
+    node1 -> node2 [label="stmt"];
+    node6 [label="EXPR_LEAF: i"];
+    node5 -> node6 [label="address"];
+    node7 [label="EXPR_LOAD_IMMEDIATE: 0"];
+    node5 -> node7 [label="value"];
+    node5 [label="expr_store\nsize: 4\noffset: 0"];
+    node1 -> node5 [label="stmt"];
+    node11 [label="EXPR_LEAF: i"];
+    node10 -> node11 [label="base"];
+    node10 [label="expr_load\nsize: 4\noffset: 0"];
+    node9 -> node10 [label="left"];
+    node12 [label="EXPR_LOAD_IMMEDIATE: 10"];
+    node9 -> node12 [label="right"];
+    node9 [label="expr_binary\nop: icompare_lt"];
+    node8 -> node9 [label="condition"];
+    node15 [label="EXPR_LEAF: c"];
+    node14 -> node15 [label="address"];
+    node18 [label="EXPR_LEAF: c"];
+    node17 -> node18 [label="base"];
+    node17 [label="expr_load\nsize: 4\noffset: 0"];
+    node16 -> node17 [label="left"];
+    node20 [label="EXPR_LOAD_IMMEDIATE: 2"];
+    node19 -> node20 [label="left"];
+    node22 [label="EXPR_LEAF: i"];
+    node21 -> node22 [label="base"];
+    node21 [label="expr_load\nsize: 4\noffset: 0"];
+    node19 -> node21 [label="right"];
+    node19 [label="expr_binary\nop: imul"];
+    node16 -> node19 [label="right"];
+    node16 [label="expr_binary\nop: iadd"];
+    node14 -> node16 [label="value"];
+    node14 [label="expr_store\nsize: 4\noffset: 0"];
+    node13 -> node14 [label="stmt"];
+    node13 [label="SCOPE"];
+    node8 -> node13 [label="scope"];
+    node8 [label="LOOP"];
+    node1 -> node8 [label="stmt"];
+    node25 [label="EXPR_LEAF: c"];
+    node24 -> node25 [label="base"];
+    node24 [label="expr_load\nsize: 4\noffset: 0"];
+    node23 -> node24 [label="value"];
+    node23 [label="RETURN"];
+    node1 -> node23 [label="stmt"];
+    node1_i [label="i: _i32"];
+    node1 -> node1_i;
+    node1_c [label="c: _i32"];
+    node1 -> node1_c;
+    node1 [label="SCOPE"];
+    }
+}

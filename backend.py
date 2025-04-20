@@ -41,7 +41,7 @@ def compiler():
     
     try:
         # Run codegen.exe with the input file
-        result = subprocess.run(["binaries/codegen.exe", filepath], capture_output=True, text=True, timeout=30)
+        result = subprocess.run(["binaries/codegen.exe", filepath,"-no-print"], capture_output=True, text=True, timeout=30)
 
         # Check if the process ran successfully
         if result.returncode != 0:
@@ -93,6 +93,43 @@ def tokenizer():
         
         os.remove(output_file)
         return jsonify({"tokens": codegen_output})
+    except subprocess.TimeoutExpired:
+        return jsonify({"error": "Process timed out"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    
+@app.route('/parser',methods=['POST'])
+def parser():
+    filepath = handle_file_upload(request)
+    if not filepath:
+        return jsonify({"error": "File not found"}), 400
+
+    # Binary for the codegen.exe
+    binaryPath = os.path.abspath(os.path.join('binaries', 'parser.exe'))
+    output_file = "ast.dot"
+
+    if not os.path.exists(binaryPath):
+        return jsonify({"error": "Parser executable not found"}), 500
+    
+    try:
+        # Run codegen.exe with the input file
+        result = subprocess.run(["binaries/parser.exe", filepath], capture_output=True, text=True, timeout=30)
+
+        # Check if the process ran successfully
+        if result.returncode != 0:
+            return jsonify({"error": result.stderr}), 500
+        
+        # Check if output file exists after execution
+        if not os.path.exists(output_file):
+            return jsonify({"error": "Output file not found"}), 500
+
+        # Read the content of the output file
+        with open(output_file, "r") as file:
+            codegen_output = file.read()
+        
+        os.remove(output_file)
+        return jsonify({"parseTree": codegen_output})
     except subprocess.TimeoutExpired:
         return jsonify({"error": "Process timed out"}), 500
     except Exception as e:

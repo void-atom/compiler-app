@@ -1,3 +1,24 @@
+const viz = new Viz();
+
+function renderASTGraph(dotString) {
+    const graphContainer = document.getElementById('parser-output');
+    graphContainer.innerHTML = ""; // Clear previous content
+
+    viz.renderSVGElement(dotString)
+        .then(function (svgElement) {
+            svgElement.style.background = "none";
+            svgElement.style.width = "100%";  
+            svgElement.style.height = "auto"; 
+
+            graphContainer.innerHTML = "";
+            graphContainer.appendChild(svgElement);
+        })
+        .catch(function (error) {
+            console.error("Error rendering graph:", error);
+            graphContainer.innerHTML = "Failed to render AST.";
+        });
+}
+
 
 function handleCompilerClick() 
 {
@@ -34,6 +55,7 @@ function handleCompilerClick()
         });
 
 }
+
 function handleTokenizerClick()
 {
     const codeInput = document.getElementById('code-input').value.trim();
@@ -45,7 +67,7 @@ function handleTokenizerClick()
 
     const formData = new FormData();
     const blob = new Blob([codeInput], { type: 'text/plain' });
-    formData.append('file', blob, 'code.c'); // You can change 'code.c' to any file extension
+    formData.append('file', blob, 'token.c'); 
 
     // Send the form data to the backend
     fetch('http://127.0.0.1:5000/tokenizer', {
@@ -68,6 +90,43 @@ function handleTokenizerClick()
         });
 }
 
+function handleParserClick()
+{
+    const codeInput = document.getElementById('code-input').value.trim();
+    if (codeInput === '') 
+    {
+        alert("Please enter some code to compile.");
+        return;
+    }
+
+    const formData = new FormData();
+    const blob = new Blob([codeInput], { type: 'text/plain' });
+    formData.append('file', blob, 'parse.c'); 
+
+    // Send the form data to the backend
+    fetch('http://127.0.0.1:5000/parser', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Server Response: ", data); 
+            if (data.parseTree) {
+                // document.getElementById('parser-output').innerHTML = data.parseTree;
+                renderASTGraph(data.parseTree);
+                console.log(data.parseTree);
+            } else {
+                document.getElementById('parser-output').innerHTML = 'Error generating AST.';
+            }
+        })
+        .catch(error => {
+            console.error('Error uploading file:', error);
+            document.getElementById('parser-output').innerHTML = 'Failed to generate AST.';
+        });
+}
+
 document.getElementById('runCompiler').addEventListener('click', handleCompilerClick );
 document.getElementById('runTokenizer').addEventListener('click', handleTokenizerClick );
+document.getElementById('runParser').addEventListener('click', handleParserClick );
+
 

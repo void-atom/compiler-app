@@ -4,8 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C Code Editor & Tokenizer</title>
+  <title>komp</title>
   <link rel="stylesheet" href="static/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/viz.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/viz.js/2.1.2/full.render.js"></script>
+  
+
 </head>
 
 <body>
@@ -13,44 +17,44 @@
     <h2>C-Compiler for RISC-V</h2>
   </div>
 
-    <div class="container">
-      <div class="left-section">
-        <h3>Input Code</h3>
-        <textarea id="code-input"></textarea>
-      </div>
-
-      <div class="right-section">
-        <h3>Assembly Output</h3>
-        <div id="Assembly">No Assembly code yet</div>
-        <form id="uploadForm"></form>
-        <button type="submit" id = "runCompiler">Run Compiler</button>
-        </form>
-      
-      </div>
+  <div class="container">
+    <div class="left-section">
+      <h3>Input Code</h3>
+      <textarea id="code-input"></textarea>
     </div>
 
-    <div class="container">
-      <div class="left-section">
-        <h3>Tokenizer Output</h3>
-        <div id="tokenizer-output">No Tokens yet</div>
-        <form id="uploadForm"></form>
-        <button type="submit" id ="runTokenizer">Run Tokenizer</button>
-        </form>
-      
-      </div>
+    <div class="right-section">
+      <h3>Assembly Output</h3>
+      <div id="Assembly">No Assembly code yet</div>
+      <form id="uploadForm"></form>
+      <button type="submit" id="runCompiler">Run Compiler</button>
+      </form>
 
-      <div class="right-section">
-        <h3>Parser Output</h3>
-        <div id="parser-output">No AST yet</div>
-        <form id="uploadForm"></form>
-        <button type="submit">Run Parser</button>
-        </form>
-      
-      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left-section">
+      <h3>Tokenizer Output</h3>
+      <div id="tokenizer-output">No Tokens yet</div>
+      <form id="uploadForm"></form>
+      <button type="submit" id="runTokenizer">Run Tokenizer</button>
+      </form>
+
     </div>
 
+    <div class="right-section">
+      <h3>Parser Output</h3>
+      <div id="parser-output">No AST yet</div>
+      <form id="uploadForm"></form>
+      <button type="submit" id="runParser">Run Parser</button>
+      </form>
 
-    <script src="static/script.js"></script>
+    </div>
+  </div>
+
+
+  <script src="static/script.js"></script>
 </body>
 
 </html>
